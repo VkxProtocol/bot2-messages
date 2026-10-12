@@ -1,4 +1,5 @@
 import logging
+import os
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CallbackContext
 
@@ -7,7 +8,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Token do bot e ID do grupo
-TOKEN = '[REDACTED_SECRET]'
+TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+if not TOKEN:
+    raise RuntimeError('TELEGRAM_BOT_TOKEN não configurado no ambiente')
 GROUP_CHAT_ID = '-1002405955713'
 
 # Lista de mensagens a serem enviadas
